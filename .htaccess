@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /
+
+
+RewriteCond %{HTTP_HOST} ^dpo.specdpo\.ru$ [NC]
+RewriteCond %{REQUEST_URI} !/public/
+RewriteRule ^(.*)$ /public/$1 [L]
