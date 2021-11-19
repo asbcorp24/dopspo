@@ -112,36 +112,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
 
-                <div class="panel panel-bordered">
-
-                    <div class="panel-body">
-                        <table class="table table-bordered">
-                            <thead>
-                            <th>Дата</th>
-                            <th>Услуга</th>
-                            <th>Дата завершения</th>
-                            <th>Оплачено</th>
-                            </thead>
-                            <tbody>
-                        @foreach ($uslug as $usl)
-                         <tr>
-                             <td>{{$usl->created_at}}</td>
-                             <td>{{$usl->usluga->name}}</td>
-                             <td><input type="date" value="{{$usl->dat_zav}}" class="form-control dt" data-id="{{$usl->id}}" data-name="dat_zav"></td>
-                             <td><input type="checkbox" value="1" class="dt" @if($usl->opl==1) checked @endif  data-id="{{$usl->id}}"  data-name="opl"></td>
-
-
-                         </tr>
-                        @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="modal fade modal-danger" id="confirm_delete_modal">

@@ -22,24 +22,6 @@
 
     @endif
 @endif
-@if(json_decode($dataTypeContent->{$row->field}) !== null)
 
-<input @if($row->required == 1 && !isset($dataTypeContent->{$row->field})) required @endif type="file" name="{{ $row->field }}[]" @if(count(json_decode($dataTypeContent->{$row->field}))>0)
-  style="display:none"
-    @endif id="df"
-    >
-
-@endif
-@if(json_decode($dataTypeContent->{$row->field}) == null)
     <input @if($row->required == 1 && !isset($dataTypeContent->{$row->field})) required @endif type="file" name="{{ $row->field }}[]" id="df">
-@endif
-<script>
-let dd=document.getElementsByClassName('remove-multi-file');
-let df=document.getElementById('df');
 
-  dd[0].addEventListener('click',function(){
-      console.log(df);
-      df.style.display = null;
-
-  });
-</script>

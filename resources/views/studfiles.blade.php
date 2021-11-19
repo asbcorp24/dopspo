@@ -251,9 +251,6 @@
                                             </td>
                                         @endforeach
                                         <td class="no-sort no-click bread-actions">
-                                            <a href="{{url('admin/studfiles/').'/'.$data->id}}" title="Файлы слушателя" class="btn btn-sm btn-success">
-                                                <i class="voyager-upload"></i> <span class="hidden-xs hidden-sm">Файлы слушателя</span>
-                                            </a>
                                             @foreach($actions as $action)
                                                 @if (!method_exists($action, 'massAction'))
                                                     @include('voyager::bread.partials.actions', ['action' => $action])
