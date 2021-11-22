@@ -21,6 +21,6 @@ Route::get('lcab','index@lcab');
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::post('chusl','index@chusl');
-    Route::get('studfile/{id}','studfile@index')->name('studfiles');
+    Route::get('studfile/{id}','studfile@index')->name('studfile');
 
 });
