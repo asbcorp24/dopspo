@@ -22,5 +22,5 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::post('chusl','index@chusl');
     Route::get('studfile/{id}','studfile@index')->name('studfile');
-
+    Route::post('api','api@index')->name('api');
 });

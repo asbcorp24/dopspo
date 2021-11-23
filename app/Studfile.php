@@ -29,4 +29,9 @@ self::updated(function ($model) {
 });
 
     }
+    public function tdoc()
+    {
+        return $this->belongsTo('App\Tipdocaccr','tipdoc_id');
+    }
+
 }

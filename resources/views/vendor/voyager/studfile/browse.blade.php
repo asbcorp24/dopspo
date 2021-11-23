@@ -8,6 +8,14 @@
             <i class="{{ $dataType->icon }}"></i> {{ $dataType->getTranslatedAttribute('display_name_plural') }}
         </h1>
         @if(!empty($dataTypeContent))
+            <br>
+            <h1 >
+            @php
+            $fio=\App\Student::where('id',$dataTypeContent->first()->student)->get()->first();
+echo $fio->fam." ".$fio->name." ".$fio->otch;
+
+@endphp
+            </h1>
         @can('add', app($dataType->model_name))
 
             <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-add-new">
@@ -38,6 +46,7 @@
         @endforeach
         @include('voyager::multilingual.language-selector')
             @endif
+        <button class="btn btn-info" id="snmo">Отправить письмом вложения</button>
     </div>
 @stop
 
@@ -335,6 +344,34 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    {{-- Single delete modal --}}
+    <div class="modal modal-info fade" tabindex="-1" id="sendp" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                   Отправить почту
+                </div>
+                <div class="modal-footer">
+                    <label>почта получателя </label>
+                   <input type="email" value="{{setting('admin.nmop')}}" required class="form-control" id="pmail">
+<label>Тема письма</label>
+                    <input class="form-control" id="ptext" value="Документы  @php
+                        $fio=\App\Student::where('id',$dataTypeContent->first()->student)->get()->first();
+            echo $fio->fam." ".$fio->name." ".$fio->otch;
+
+                    @endphp">
+                        {{ csrf_field() }}
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" id="psubm">Отправить </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 @stop
 
 @section('css')
@@ -350,7 +387,28 @@
     @endif
     <script>
         $(document).ready(function () {
-            @if (!$dataType->server_side)
+
+            $('#snmo').click(function (){
+$('#sendp').modal('show');return;
+
+
+
+            });
+            $('#psubm').click(function (){
+                $.post('{{url('admin/api')}}', {
+                    'md': '1',
+                    'id': {{$dataTypeContent->first()->student}},
+                    'mail':$('#pmail').val(),
+                    'subj':$('#ptext').val(),
+                    '_token': '{{ csrf_token() }}'
+                }, function (data) {
+
+
+                });
+                $('#sendp').modal('hide');
+            });
+
+    @if (!$dataType->server_side)
                 var table = $('#dataTable').DataTable({!! json_encode(
                     array_merge([
                         "order" => $orderColumn,
